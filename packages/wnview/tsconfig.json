@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "strict": true,
+    "target": "ES2015",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "lib": ["esnext", "dom"]
+  },
+  // 指定被编译文件所在的目录 ** 表示任意目录， * 表示任意文件
+  // "include": [],
+  // 指定不需要被编译的目录
+  "exclude": ["node_modules","*.config.ts"]
+}
