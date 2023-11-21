@@ -3,7 +3,8 @@ import loadding from './loadding.vue'
 
 interface LoaddingFace {
   parent: any,
-  close: Function
+  close: Function,
+  remove: Function
 }
 
 var nowLoadding: LoaddingFace | null = null
@@ -16,6 +17,12 @@ function createLoadding(type: string, title: string, duration: number, mark: boo
   let tloadding = nowLoadding = {
     parent: parent,
     close: () => {
+      parent.getElementsByClassName("wn-loadding")[0].setAttribute("class", "wn-loadding wn-loadding-animation wn-loadding-leave-to")
+      setTimeout(() => {
+        tloadding.remove()
+      }, 300);
+    },
+    remove: () => {
       document.body.removeChild(parent)
       nowLoadding = null
     }
@@ -61,7 +68,7 @@ export function Loadding(config?: string | {
     if (config.mark != undefined) tconfig.mark = config.mark === false ? false : true
   }
   if (nowLoadding) {
-    nowLoadding.close()
+    nowLoadding.remove()
   }
   return createLoadding(tconfig.type, tconfig.title, tconfig.duration, tconfig.mark)
 }

@@ -1,5 +1,9 @@
 <template>
-	<div class="wn-loadding" @click.stop="">
+	<div
+		class="wn-loadding wn-loadding-animation"
+		:class="{ 'wn-loadding-enter-from': enter }"
+		@click.stop=""
+	>
 		<div class="wn-loadding-box">
 			<Vue3Lottie
 				class="wn-loadding-box-lottie"
@@ -14,9 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { Vue3Lottie } from 'vue3-lottie'
-
+// 基础数据接收和处理
 interface pageFace {
 	json: any
 	round: Boolean
@@ -44,9 +48,27 @@ const modules = import.meta.glob('./*.json')
 modules[href]().then((mod: any) => {
 	page.json = mod.default
 })
+
+// 进出动画
+let enter = ref(false)
+onMounted(() => {
+	enter.value = true
+	setTimeout(() => {
+		enter.value = false
+	}, 300)
+})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.wn-loadding-animation {
+	transition: all 0.3s ease;
+}
+
+.wn-loadding-enter-from,
+.wn-loadding-leave-to {
+	opacity: 0;
+}
+
 .wn-loadding {
 	box-sizing: border-box;
 

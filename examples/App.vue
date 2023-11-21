@@ -9,7 +9,8 @@
 import { Button } from 'wnview'
 import { Loadding } from 'wnview'
 
-Loadding(
-  // { type: 'diamond' }
-  )
+Loadding({ type: 'diamond', duration: 3000 })
+setInterval(() => {
+	Loadding({ type: 'diamond', duration: 3000 })
+}, 4000)
 </script>
